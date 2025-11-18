@@ -1,13 +1,20 @@
 import { Router } from 'express';
 import { authenticate } from '../middlewares/auth.middleware';
+import * as reflectionController from '../controllers/reflection.controller';
 
 const router = Router();
 
 router.use(authenticate);
 
-// TODO: Implement reflection routes
-router.get('/', (req, res) => {
-  res.json({ message: 'Reflections endpoint - coming soon' });
-});
+router.post('/', reflectionController.create);
+router.get('/', reflectionController.getAll);
+router.get('/date-range', reflectionController.getByDateRange);
+router.get('/mood/:mood', reflectionController.getByMood);
+router.get('/:id', reflectionController.getById);
+router.put('/:id', reflectionController.update);
+router.delete('/:id', reflectionController.remove);
+router.post('/:id/insights', reflectionController.addInsight);
+router.post('/:id/link-goal', reflectionController.linkGoal);
+router.post('/:id/link-content', reflectionController.linkContent);
 
 export default router;
