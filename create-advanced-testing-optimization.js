@@ -177,7 +177,6 @@ export const emailQueue = new Bull<EmailJob>('email', {
 
 emailQueue.process(async (job) => {
   const { to, subject, body } = job.data;
-  console.log('Sending email to ${to}: ${subject}');
   // Implement actual email sending logic here
   await new Promise(resolve => setTimeout(resolve, 1000));
   return { success: true };
